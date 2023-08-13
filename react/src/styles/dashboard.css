@@ -71,6 +71,7 @@
 
   .dashboard-link:hover {
     opacity: 0.9;
+    color: black;
   }
   
   @media screen and (min-width: 768px) {

@@ -45,9 +45,12 @@ function ViewProduct()
                     <td>{item.selling_price}</td>
                     <td><img src={`http://localhost:8000/${item.image}`} width="50px" alt={item.name} /></td>
                     <td>
-                        <Link to={`edit-product/${item.id}`} className="btn btn-success btn-sm">Edit</Link>
+                    <Link to={`edit-product/${item.id}`} className="btn btn-success btn-sm">
+                        {item.qty === 0 ? 'View' : 'Edit'}
+                    </Link>
                     </td>
-                    <td>{item.qty == 0 ? 'Unavailable':'Available'}</td>
+                    <td>{item.qty === 0 ? 'Unavailable' : 'Available'}</td>
+
                 </tr>
             )
         });

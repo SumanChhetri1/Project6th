@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
@@ -25,6 +25,10 @@ function Category() {
     const handleImage = (e) => {
         setPicture({ image: e.target.files[0] });
     }
+
+    useEffect(() => {
+        document.title = "Add Category";
+    }, []);
 
     const submitCategory = (e) => {
         e.preventDefault();

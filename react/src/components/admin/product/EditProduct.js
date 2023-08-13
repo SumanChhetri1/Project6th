@@ -44,6 +44,8 @@ function EditProduct(props)
 
     useEffect(() => {
         
+        document.title = "Edit Product";
+        
         axios.get(`/api/all-category`).then(res=>{
             if(res.data.status === 200)
             {

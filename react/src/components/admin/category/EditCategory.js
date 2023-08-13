@@ -11,6 +11,8 @@ function EditCategory(props)
     const [error, setError] = useState([]);
 
     useEffect(() => {
+        document.title = "Edit Category";
+
         
         const category_id = props.match.params.id;
         axios.get(`/api/edit-category/${category_id}`).then(res=>{

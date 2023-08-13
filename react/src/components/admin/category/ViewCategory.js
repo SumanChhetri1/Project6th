@@ -10,6 +10,8 @@ function ViewCategory() {
 
     useEffect(() => {
         let isMounted = true;
+        document.title = "View Category";
+
 
         axios.get(`/api/view-category`).then(res=>{
             if(isMounted)

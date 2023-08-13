@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import '../../styles/dashboard.css'
 
 
@@ -13,6 +13,8 @@ function Dashboard() {
   const [returnCount, setReturnCount] = useState(0);
 
   useEffect(() => {
+    document.title = "Dashboard";
+
     fetchData();
   }, []);
 

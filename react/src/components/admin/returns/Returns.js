@@ -7,6 +7,8 @@ function Returns() {
   const [returnsData, setReturnsData] = useState([]);
 
   useEffect(() => {
+    document.title = "Returns";
+
     fetchReturnsData();
   }, []);
 
@@ -40,9 +42,9 @@ function Returns() {
   
       if (res.data.status === 200) {
         swal("Success", res.data.message, "success");
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 1000);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       }
     } catch (error) {
       console.log(error);
@@ -67,13 +69,23 @@ function Returns() {
         <td>{item.product_name}</td>
         <td>{item.return_qty}</td>
         <td>
-          <button
+        <button
             type="button"
-            onClick={(e) => handleApproveReturn(e,item.product_id, item.id, item.order_id, item.return_qty)}
-            className="btn btn-success btn-sm">
-          
-            Approve
+            onClick={(e) =>
+              handleApproveReturn(
+                e,
+                item.product_id,
+                item.id,
+                item.order_id,
+                item.return_qty
+              )
+            }
+            className={`btn btn-${item.returned === 1 ? 'secondary' : 'success'} btn-sm`}
+            disabled={item.returned === 1} // Disable the button if returned is 1
+            >
+            {item.returned === 1 ? 'Approved' : 'Approve'}
           </button>
+
         </td>
       </tr>
     ));

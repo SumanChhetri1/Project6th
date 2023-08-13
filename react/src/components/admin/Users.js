@@ -11,6 +11,8 @@ function Users() {
     
     useEffect(() => {
         let isMounted = true;
+        document.title = "Users";
+
 
         axios.get(`/api/view-users`).then(res=>{
             if(isMounted)

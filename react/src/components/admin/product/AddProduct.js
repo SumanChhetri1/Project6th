@@ -38,6 +38,8 @@ function AddProduct()
 
     useEffect( () => {
         let isMounted = true;
+        document.title = "Add Product";
+
         
         axios.get(`/api/all-category`).then(res=>{
             if(isMounted)

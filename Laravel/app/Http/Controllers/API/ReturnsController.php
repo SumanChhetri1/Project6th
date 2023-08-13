@@ -13,7 +13,8 @@ class ReturnsController extends Controller
     public function index()
     {
         //checking returned value 0 or not
-        $returns = Returns::where('returned', '=', 0)->get();
+        // $returns = Returns::where('returned', '=', 0)->get();
+        $returns = Returns::all();
         return response()->json([
             'status' => 200,
             'returns' => $returns,
