@@ -82,57 +82,112 @@ class CartController extends Controller
         }
     }
 
+    // public function updatequantity($cart_id, $scope)
+    // {
+    //     if(auth('sanctum')->check())
+    //     {
+    //         $user_id = auth('sanctum')->user()->id;
+    //         $cartitem = Cart::where('id',$cart_id)->where('user_id',$user_id)->first();
+    //         if($scope == "inc"){
+    //             $cartitem->product_qty += 1;
+    //         }else if($scope == "dec"){
+    //             $cartitem->product_qty -= 1;
+    //         }
+    //         $cartitem->update();
+    //         return response()->json([
+    //             'status'=> 200,
+    //             'message'=> 'Quantity Updated',
+    //         ]);
+    //     }
+    //     else
+    //     {
+    //         return response()->json([
+    //             'status'=> 401,
+    //             'message'=> 'Login to continue',
+    //         ]);
+    //     }
+    // }
     public function updatequantity($cart_id, $scope)
-    {
-        if(auth('sanctum')->check())
-        {
-            $user_id = auth('sanctum')->user()->id;
-            $cartitem = Cart::where('id',$cart_id)->where('user_id',$user_id)->first();
-            if($scope == "inc"){
-                $cartitem->product_qty += 1;
-            }else if($scope == "dec"){
-                $cartitem->product_qty -= 1;
-            }
-            $cartitem->update();
-            return response()->json([
-                'status'=> 200,
-                'message'=> 'Quantity Updated',
-            ]);
-        }
-        else
-        {
-            return response()->json([
-                'status'=> 401,
-                'message'=> 'Login to continue',
-            ]);
-        }
-    }
+{
+    if (auth('sanctum')->check()) {
+        $user_id = auth('sanctum')->user()->id;
+        $cartitem = Cart::where('id', $cart_id)->where('user_id', $user_id)->first();
 
-    public function updatedays($cart_id, $scope)
-    {
-        if(auth('sanctum')->check())
-        {
-            $user_id = auth('sanctum')->user()->id;
-            $cartitem = Cart::where('id',$cart_id)->where('user_id',$user_id)->first();
-            if($scope == "inc"){
-                $cartitem->rent_days += 1;
-            }else if($scope == "dec"){
-                $cartitem->rent_days -= 1;
+        if (!$cartitem) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Cart item not found',
+            ]);
+        }
+
+        if ($scope == "inc") {
+            $cartitem->product_qty += 1;
+        } else if ($scope == "dec") {
+            if ($cartitem->product_qty > 1) {
+                $cartitem->product_qty -= 1;
+            } else {
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'Quantity cannot go below 0',
+                ]);
             }
-            $cartitem->update();
-            return response()->json([
-                'status'=> 200,
-                'message'=> 'Days Updated',
-            ]);
         }
-        else
-        {
-            return response()->json([
-                'status'=> 401,
-                'message'=> 'Login to continue',
-            ]);
-        }
+
+        $cartitem->update();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Quantity Updated',
+        ]);
+    } else {
+        return response()->json([
+            'status' => 401,
+            'message' => 'Login to continue',
+        ]);
     }
+}
+
+
+public function updatedays($cart_id, $scope)
+{
+    if (auth('sanctum')->check()) {
+        $user_id = auth('sanctum')->user()->id;
+        $cartitem = Cart::where('id', $cart_id)->where('user_id', $user_id)->first();
+
+        if (!$cartitem) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Cart item not found',
+            ]);
+        }
+
+        if ($scope == "inc") {
+            $cartitem->rent_days += 1;
+        } else if ($scope == "dec") {
+            if ($cartitem->rent_days > 1) {
+                $cartitem->rent_days -= 1;
+            } else {
+                return response()->json([
+                    'status' => 400,
+                    'message' => 'Rent days cannot go below 1',
+                ]);
+            }
+        }
+
+        $cartitem->update();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Days Updated',
+        ]);
+    } else {
+        return response()->json([
+            'status' => 401,
+            'message' => 'Login to continue',
+        ]);
+    }
+}
+
 
     public function deleteCartitem($cart_id)
     {

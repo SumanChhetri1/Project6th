@@ -15,14 +15,14 @@ class CheckoutController extends Controller
         if(auth('sanctum')->check())
         {
             $validator = Validator::make($request->all(), [
-                'firstname' => 'required|max:191',
-                'lastname'=>'required|max:191',
-                'phone'=>'required|max:191',
-                'email'=>'required|max:191',
-                'address'=>'required|max:191',
-                'city'=>'required|max:191',
-                'state'=>'required|max:191',
-                'zipcode'=>'required|max:191',
+                'firstname' => 'required|max:191|regex:/^[a-zA-Z]+$/',
+                'lastname'=>'required|max:191|regex:/^[a-zA-Z]+$/',
+                'phone'=>'required|min:10|max:10',
+                'email'=>'required|email|max:191',
+                'address'=>'required|max:191|regex:/^[a-zA-Z0-9\-(), ]+$/|regex:/[a-zA-Z]+/|regex:/[0-9]+/',
+                'city'=>'required|max:191|regex:/^[a-zA-Z]+$/',
+                'state'=>'required|max:191|regex:/^[a-zA-Z]+$/',
+                'zipcode'=>'required|min:5|max:5',
             ]);
 
             if($validator->fails())
@@ -89,7 +89,7 @@ class CheckoutController extends Controller
         if(auth('sanctum')->check())
         {
             $validator = Validator::make($request->all(), [
-                'firstname' => 'required|max:191',
+                'firstname' => 'required|max:191|regex:/^[a-zA-Z]+$/',
                 'lastname'=>'required|max:191',
                 'phone'=>'required|max:191',
                 'email'=>'required|max:191',

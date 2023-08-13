@@ -15,7 +15,8 @@ class Returns extends Model
         'user_name',
         'user_id',
         'order_id',
-        'returned'
+        'returned',
+        'return_qty'
 
 
 

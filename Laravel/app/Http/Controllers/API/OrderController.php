@@ -11,7 +11,8 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::where('returned', '=', 0)->get();
+        $orders = Order::all();
+        // $orders = Order::where('returned', '=', 0)->get();
         return response()->json([
             'status' => 200,
             'orders' => $orders,
@@ -45,7 +46,7 @@ public function viewmyorders()
             ->join('users', 'orders.user_id', '=', 'users.id')
             ->join('orderitems', 'orders.id', '=', 'orderitems.order_id')
             ->join('products', 'orderitems.product_id', '=', 'products.id')
-            ->select('orders.*', 'users.name as user_name', 'products.id as product_id', 'products.name as product_name', 'products.image as product_image')
+            ->select('orders.*', 'users.name as user_name', 'orderitems.qty as return_qty', 'products.id as product_id', 'products.name as product_name', 'products.image as product_image')
             ->get();
         
         return response()->json([

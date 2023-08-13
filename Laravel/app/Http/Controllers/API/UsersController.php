@@ -13,12 +13,15 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = Users::all();
+        $users = Users::where('id', '<>', 1) // Exclude user with ID 1
+                       ->get();
+    
         return response()->json([
-            'status'=>200,
-            'users'=>$users,
+            'status' => 200,
+            'users' => $users,
         ]);
     }
+    
 
     public function allusers()
     {

@@ -18,6 +18,7 @@ class CreateReturnsTable extends Migration
             $table->integer('product_id');
             $table->integer('user_id');
             $table->integer('order_id');
+            $table->integer('return_qty');
             $table->string('product_name');
             $table->string('user_name');
             $table->tinyInteger('returned')->default('0');

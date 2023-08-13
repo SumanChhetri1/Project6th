@@ -11,6 +11,7 @@ use App\Http\Controllers\API\UsersController;
 use App\Http\Controllers\API\CheckoutController;
 use App\Http\Controllers\API\FrontendController;
 use App\Http\Controllers\API\ReturnsController;
+use App\Http\Controllers\API\DashboardController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
@@ -66,6 +67,9 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
     // Returns
     Route::get('admin/returns', [ReturnsController::class, 'index']);
     Route::post('admin/approve-return', [ReturnsController::class, 'approveReturn']);
+
+    // Dashboard
+    Route::get('admin/dashboard', [DashboardController::class, 'index']);
 
 
 

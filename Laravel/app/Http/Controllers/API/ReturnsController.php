@@ -53,6 +53,7 @@ class ReturnsController extends Controller
         'product_id' => 'required|integer',
         'order_id' => 'required|integer',
         'product_name' => 'required|string',
+        'return_qty' => 'required|integer',
     ]);
 
     try {
@@ -76,6 +77,7 @@ class ReturnsController extends Controller
             'product_id' => $request->product_id,
             'product_name' => $request->product_name,
             'order_id' => $request->order_id,
+            'return_qty' => $request->return_qty,
         ]);
         $return->save();
 
@@ -102,6 +104,7 @@ public function approveReturn(Request $request)
         'product_id' => 'required|integer',
         'order_id' => 'required|integer',
         'return_id' => 'required|integer',
+        'return_qty' => 'required|integer',
     ]);
 
     $product = Product::find($validatedData['product_id']);
@@ -115,8 +118,8 @@ public function approveReturn(Request $request)
         ]);
     }
 
-    // Update the product quantity by adding 1
-    $product->qty += 1;
+    // Validation passed, increment the product quantity
+    $product->qty += $validatedData['return_qty'];
     // removing the data from the Returns table
     $returns->returned = 1;
     // removing the data from the Orders table
