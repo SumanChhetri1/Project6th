@@ -58,11 +58,16 @@ function Cart()
     const handleQuantityIncrement = (cart_id) => {
         setCart(cart => 
             cart.map( (item) => 
-                cart_id === item.id ? {...item, product_qty: item.product_qty + (item.product_qty < 20 ? 1:0)} : item
+                cart_id === item.id ? {...item, product_qty: item.product_qty + (item.product_qty < item.product.qty ? 1 : 0)} : item
             )
         );
-        updateCartQuantity(cart_id,"inc");
-    }
+        // Check if the increment is allowed before calling updateCartQuantity
+        const cartItem = cart.find(item => item.id === cart_id);
+        if (cartItem.product_qty < cartItem.product.qty) {
+            updateCartQuantity(cart_id, "inc");
+        }
+    };
+    
 
     
       

@@ -63,6 +63,7 @@ function Orders(props) {
           user_name: selectedOrder.user_name,
           product_id: selectedOrder.product_id,
           order_id: selectedOrder.id,
+          return_qty: selectedOrder.return_qty,
           product_name: selectedOrder.product_name,
         };
       

@@ -26,14 +26,14 @@ const Header = () => {
         </Col>
         
         <Col lg='6' md='6'sm='6'>
-        <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
+        {/* <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
             <Link to='/login' className='d-flex align-items-center gap-1'>
               <i className="ri-login-box-fill"></i> Login
             </Link>
             <Link to='/register' className='d-flex align-items-center gap-1'>
               <i className="ri-file-user-fill"></i> Register
             </Link>
-          </div>
+          </div> */}
         </Col>
       </Row>
     </Container>

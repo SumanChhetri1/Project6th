@@ -1,0 +1,81 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .title-container {
+    background-color: chartreuse; /* Background color for the title area */
+    width: 100%; /* Make the title container span the full width */
+    height: 60px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .dashboard-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: white; /* Text color */
+    margin: 0;
+    height: 100%; /* Set the desired height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dashboard-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .dashboard-stat {
+    margin: 10px;
+    text-align: center;
+  }
+  
+  .dashboard-link {
+    display: block;
+    width: 180px;
+    height: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .user-button {
+    background-color: #3498db; /* Blue color */
+  }
+  
+  .product-button {
+    background-color: #e74c3c; /* Red color */
+  }
+  
+  .category-button {
+    background-color: #27ae60; /* Green color */
+  }
+  
+  .order-button {
+    background-color: orange; /* orange color */
+  }
+  
+  .return-button {
+    background-color: blueviolet; /* blue violet color */
+  }
+
+  .dashboard-link:hover {
+    opacity: 0.9;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .dashboard-stats {
+      justify-content: space-between;
+    }
+  }
+  

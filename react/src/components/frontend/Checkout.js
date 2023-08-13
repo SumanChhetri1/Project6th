@@ -63,9 +63,54 @@ function Checkout() {
     };
   }, [history]);
 
+  const regexPatterns = {
+    firstname: /^[a-zA-Z]+$/,
+    lastname: /^[a-zA-Z]+$/,
+    phone: /^\d{10}$/,
+    email: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+    address: /^[a-zA-Z0-9\-(), ]+$/,
+    city: /^[a-zA-Z]+$/,
+    state: /^[a-zA-Z]+$/,
+    zipcode: /^\d{5}$/,
+  };
+
+  const errorMessages = {
+    firstname: 'Please enter a valid first name',
+    lastname: 'Please enter a valid last name',
+    phone: 'Please enter a valid 10-digit phone number',
+    email: 'Please enter a valid email address',
+    address: 'Please enter a valid address',
+    city: 'Please enter a valid city name',
+    state: 'Please enter a valid state name',
+    zipcode: 'Please enter a valid 5-digit zipcode',
+  };
+
+  const validateField = (fieldName, fieldValue) => {
+    if (regexPatterns[fieldName] && !regexPatterns[fieldName].test(fieldValue)) {
+      setError((prevError) => ({ ...prevError, [fieldName]: errorMessages[fieldName] }));
+    } else {
+      setError((prevError) => ({ ...prevError, [fieldName]: '' }));
+    }
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    for (const field in checkoutInput) {
+      validateField(field, checkoutInput[field]);
+      if (!checkoutInput[field]) {
+        errors[field] = 'Field is required';
+      }
+    }
+    setError(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleInput = (e) => {
     e.persist();
-    setCheckoutInput({ ...checkoutInput, [e.target.name]: e.target.value });
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+    setCheckoutInput((prevInput) => ({ ...prevInput, [fieldName]: fieldValue }));
+    validateField(fieldName, fieldValue);
   };
 
   const handleKhaltiPaymentSuccess = (data) => {
@@ -98,6 +143,10 @@ function Checkout() {
 
   const submitOrder = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      swal('Invalid input', 'Please check the highlighted fields', 'error');
+      return;
+    }
   
     var data = {
       firstname: checkoutInput.firstname,

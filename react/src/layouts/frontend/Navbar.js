@@ -27,17 +27,17 @@ function Navbar() {
     {
         AuthButtons = (
            <>
-            {/* <NavLink className="text-white hover:bg-gray-700 no-underline hover:text-white rounded-md px-3 py-2 text-sm font-medium" 
+            <NavLink className="text-white hover:bg-green-700 no-underline hover:text-white rounded-md px-3 py-2 text-sm font-medium" 
             to="/login"
             activeStyle={{
               backgroundColor:"orange"
             }}>Login</NavLink>
                
-               <NavLink className="text-white hover:bg-gray-700 no-underline hover:text-white rounded-md px-3 py-2 text-sm font-medium" 
+               <NavLink className="text-white hover:bg-green-700 no-underline hover:text-white rounded-md px-3 py-2 text-sm font-medium" 
                to="/register"
                activeStyle={{
                 backgroundColor:"orange"
-              }}>Register</NavLink> */}
+              }}>Register</NavLink>
        
            </>
                    

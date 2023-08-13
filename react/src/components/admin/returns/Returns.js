@@ -23,7 +23,7 @@ function Returns() {
     }
   };
 
-  const handleApproveReturn = async (e, productId, returnId, orderId) => {
+  const handleApproveReturn = async (e, productId, returnId, orderId, returnQty) => {
     e.preventDefault();
     
   
@@ -35,13 +35,14 @@ function Returns() {
         product_id: productId,
         return_id: returnId,
         order_id: orderId,
+        return_qty: returnQty,
       });
   
       if (res.data.status === 200) {
         swal("Success", res.data.message, "success");
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 1000);
       }
     } catch (error) {
       console.log(error);
@@ -64,10 +65,11 @@ function Returns() {
         <td>{item.user_name}</td>
         <td>{item.product_id}</td>
         <td>{item.product_name}</td>
+        <td>{item.return_qty}</td>
         <td>
           <button
             type="button"
-            onClick={(e) => handleApproveReturn(e,item.product_id, item.id, item.order_id)}
+            onClick={(e) => handleApproveReturn(e,item.product_id, item.id, item.order_id, item.return_qty)}
             className="btn btn-success btn-sm">
           
             Approve
@@ -93,6 +95,7 @@ function Returns() {
                   <th>User Name</th>
                   <th>Product ID</th>
                   <th>Product Name</th>
+                  <th>Return Quantity</th>
                   <th>Action</th>
                 </tr>
               </thead>

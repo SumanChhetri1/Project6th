@@ -47,7 +47,7 @@ const Navbar = () => {
                 </li>
             </ul> */}
             <i className="fas fa-user fa-fw"></i>
-            <Link className="navbar-btn"  to="/login">Login</Link>
+            {/* <Link className="navbar-btn"  to="/login">Login</Link> */}
             <button type="button" onClick={logoutSubmit} className="navbar-btn">Logout</button>
 
 

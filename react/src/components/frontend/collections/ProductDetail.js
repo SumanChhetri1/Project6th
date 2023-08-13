@@ -51,7 +51,7 @@ function ProductDetail(props)
       };
     
       const handleQuantityIncrement = () => {
-        if (quantity < 10) {
+        if (quantity < product.qty) {
           setQuantity(prevCount => prevCount + 1);
         }
       };

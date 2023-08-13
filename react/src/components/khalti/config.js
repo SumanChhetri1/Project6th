@@ -21,11 +21,11 @@ let config = {
   },
   // one can set the order of payment options and also the payment options based on the order and items in the array
   paymentPreference: [
-    "MOBILE_BANKING",
+    // "MOBILE_BANKING",
     "KHALTI",
-    "EBANKING",
-    "CONNECT_IPS",
-    "SCT",
+    // "EBANKING",
+    // "CONNECT_IPS",
+    // "SCT",
   ],
 };
 
