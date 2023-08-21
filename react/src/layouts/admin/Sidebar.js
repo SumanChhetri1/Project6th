@@ -20,19 +20,14 @@ const Sidebar = () => {
                         <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                         View Category
                     </Link>
+                    <Link className="nav-link" to="/admin/add-product">
+                    <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                    Add Product</Link>
 
-
+                    <Link className="nav-link" to="/admin/view-product">
+                    <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                    View Product</Link>
                     
-                        
-                            <Link className="nav-link" to="/admin/add-product">
-                            <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
-                            Add Product</Link>
-                            <Link className="nav-link" to="/admin/view-product">
-                            <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
-                            View Product</Link>
-                        
-
-
                     <Link className="nav-link" to="/admin/users">
                         <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                         Users
@@ -92,10 +87,10 @@ const Sidebar = () => {
                     </Link> */}
                 </div>
             </div>
-            <div className="sb-sidenav-footer bg-success">
+            {/* <div className="sb-sidenav-footer bg-success">
                 <div className="small">Logged in as:</div>
                 Suman
-            </div>
+            </div> */}
         </nav>
     );
 }

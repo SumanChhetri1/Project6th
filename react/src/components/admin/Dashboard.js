@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import '../../styles/dashboard.css'
-
+import '../../styles/dashboard.css';
 
 function Dashboard() {
   const history = useHistory();
@@ -11,29 +10,40 @@ function Dashboard() {
   const [categoryCount, setCategoryCount] = useState(0);
   const [orderCount, setOrderCount] = useState(0);
   const [returnCount, setReturnCount] = useState(0);
+  const [totalOrderItemsPrice, setTotalOrderItemsPrice] = useState(0);
+  const [userInfo, setUserInfo] = useState({ name: '', email: '' });
 
   useEffect(() => {
-    document.title = "Dashboard";
+    document.title = 'Dashboard';
 
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-        const response = await axios.get(`/api/admin/dashboard`);
-        const { status, userCount, productCount, categoryCount, orderCount, returnCount } = response.data;
-        
-        if (status === 200) {
-          setUserCount(userCount);
-          setProductCount(productCount);
-          setCategoryCount(categoryCount);
-          setOrderCount(orderCount);
-          setReturnCount(returnCount);
-        } else {
-          console.error('API returned an error:', response.data);
-        }
-        
-      
+      const response = await axios.get(`/api/admin/dashboard`);
+      const {
+        status,
+        userCount,
+        productCount,
+        categoryCount,
+        orderCount,
+        returnCount,
+        userInfo,
+        totalOrderItemsPrice,
+      } = response.data;
+
+      if (status === 200) {
+        setUserCount(userCount);
+        setProductCount(productCount);
+        setCategoryCount(categoryCount);
+        setOrderCount(orderCount);
+        setReturnCount(returnCount);
+        setTotalOrderItemsPrice(totalOrderItemsPrice);
+        setUserInfo(userInfo);
+      } else {
+        console.error('API returned an error:', response.data);
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -63,6 +73,16 @@ function Dashboard() {
     <div className="dashboard-container">
       <div className="title-container">
       <h1 className="dashboard-title">Dashboard</h1>
+        <div className="user-info">
+          <div className="user-info-content">
+          <div className="user-info-text">
+          <p className="user-name">Welcome to Dashboard {userInfo.name} (Admin) !!</p>
+          <p className="user-email">Registered with Email: {userInfo.email}</p>
+        </div>
+        <p className="total-revenue">Our total Revenue: {totalOrderItemsPrice}</p>
+          </div>
+        </div>
+
         </div>
       <div className="dashboard-stats">
         <div className="dashboard-stat">
