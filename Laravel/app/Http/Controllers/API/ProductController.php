@@ -25,13 +25,13 @@ class ProductController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category_id'=>'required|max:191',
-            'slug'=>'required|max:191',
-            'name'=>'required|max:191',
+            'slug'=>'required|max:191|regex:/^[a-zA-Z0-9\-(), ]+$/|regex:/[a-zA-Z]+/|regex:/[0-9]+/',
+            'name'=>'required|max:191|alpha',
 	        // 'meta_title'=>'required|max:191',
-            'brand'=>'required|max:20',
-            'selling_price'=>'required|max:20',
-            'original_price'=>'required|max:20',
-            'qty'=>'required|max:4',
+            'brand'=>'required|max:20|alpha',
+            'selling_price'=>'required|max:20|numeric',
+            'original_price'=>'required|max:20|numeric',
+            'qty'=>'required|max:4|numeric',
             'image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
