@@ -20,6 +20,11 @@
   .contact__btn:hover{
     color: orange;
   }
+
+  .message{
+    
+    width: 100%;
+  }
   
   @media only screen and (max-width: 768px) {
     .contact__btn {

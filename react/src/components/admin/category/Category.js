@@ -75,12 +75,12 @@ function Category() {
     var display_errors = [];
     if(categoryInput.error_list)
     {
-        display_errors = [
-            categoryInput.error_list.slug,
-            categoryInput.error_list.name,
-            categoryInput.error_list.image,
-            categoryInput.error_list.meta_title,
-        ]
+        // display_errors = [
+        //     categoryInput.error_list.slug,
+        //     categoryInput.error_list.name,
+        //     categoryInput.error_list.image,
+        //     categoryInput.error_list.meta_title,
+        // ]
     }
 
     return  (
@@ -115,15 +115,17 @@ function Category() {
                                 <div className="form-group mb-3">
                                     <label>Slug</label>
                                     <input type="text" name="slug" onChange={handleInput} value={categoryInput.slug} className="form-control" />
-                                    <span>{categoryInput.error_list.slug}</span>
+                                    <small className="text-danger">{categoryInput.error_list.slug}</small>
                                 </div>
                                 <div className="form-group mb-3">
                                     <label>Name</label>
                                     <input type="text" name="name" onChange={handleInput} value={categoryInput.name} className="form-control" />
+                                    <small className="text-danger">{categoryInput.error_list.name}</small>
                                 </div>
                                 <div className="form-group mb-3">
                                     <label>Description</label>
                                     <textarea name="descrip" onChange={handleInput} value={categoryInput.descrip} className="form-control"></textarea>
+                                    <small className="text-danger">{categoryInput.error_list.descrip}</small>
                                 </div>
                                 <div className="col-md-8 form-group mb-3">
                                         <label>Image</label>

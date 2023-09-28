@@ -42,11 +42,11 @@ function Contact() {
                 <FormGroup className="contact__form">
                     <Input placeholder="Email" type="email" />
                 </FormGroup>
-                <FormGroup className="contact__form">
+                <FormGroup className="contact__form message">
                     <textarea
                     rows="5"
                     placeholder="Message"
-                    className="textarea"
+                    className="message"
                     ></textarea>
                 </FormGroup>
 

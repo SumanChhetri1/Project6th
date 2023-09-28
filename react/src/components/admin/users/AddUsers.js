@@ -50,12 +50,12 @@ const AddUsers = () => {
     var display_errors = [];
     if(usersInput.error_list)
     {
-        display_errors = [
+        // display_errors = [
             
-            usersInput.error_list.name,
-            usersInput.error_list.email,
-            usersInput.error_list.password,
-        ]
+        //     usersInput.error_list.name,
+        //     usersInput.error_list.email,
+        //     usersInput.error_list.password,
+        // ]
     }
 
     return  (
@@ -91,14 +91,17 @@ const AddUsers = () => {
                                 <div className="form-group mb-3">
                                     <label>Name</label>
                                     <input type="text" name="name" onChange={handleInput} value={usersInput.name} className="form-control" />
+                                    <small className="text-danger">{usersInput.error_list.name}</small>
                                 </div>
                                 <div className="form-group mb-3">
                                     <label>Email</label>
                                     <textarea name="email" onChange={handleInput} value={usersInput.email} className="form-control"></textarea>
+                                    <small className="text-danger">{usersInput.error_list.email}</small>
                                 </div>
                                 <div className="form-group mb-3">
                                     <label>Password</label>
                                     <textarea name="password" onChange={handleInput} value={usersInput.password} className="form-control"></textarea>
+                                    <small className="text-danger">{usersInput.error_list.password}</small>
                                 </div>
                                 
 
