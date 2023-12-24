@@ -55,9 +55,19 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name'=>'required|max:191|alpha',
-            'email'=>'required|email|max:191|unique:users,email',
-            'password'=>'required|min:8',
+            'name'=>'required|max:191|alpha_spaces',
+            'email' => [
+                'required',
+                'email',
+                "unique:users,email",
+                'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/',
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^[a-zA-Z]/', $value)) {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],   
+            'password'=>'required|min:8|regex:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).*$/',
 
 
         ]);

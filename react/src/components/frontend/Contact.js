@@ -46,7 +46,7 @@ function Contact() {
                     <textarea
                     rows="5"
                     placeholder="Message"
-                    className="message"
+                    className="form-control"
                     ></textarea>
                 </FormGroup>
 

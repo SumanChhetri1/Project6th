@@ -108,11 +108,17 @@ function Checkout() {
   const handleInput = (e) => {
     e.persist();
     const fieldName = e.target.name;
-    const fieldValue = e.target.value;
+    let fieldValue = e.target.value;
+  
+    // Check if the field is "phone" and doesn't start with "98", then add "98" as the default prefix.
+    if (fieldName === "phone" && !fieldValue.startsWith("98")) {
+      fieldValue = "98" + fieldValue;
+    }
+  
     setCheckoutInput((prevInput) => ({ ...prevInput, [fieldName]: fieldValue }));
     validateField(fieldName, fieldValue);
   };
-
+  
   const handleKhaltiPaymentSuccess = (data) => {
     var orderData = {
       firstname: checkoutInput.firstname,
@@ -234,7 +240,7 @@ function Checkout() {
                             <div className="col-md-6">
                                 <div className="form-group mb-3">
                                     <label> Phone Number</label>
-                                    <input type="number" name="phone" onChange={handleInput} value={checkoutInput.phone} className="form-control" />
+                                    <input type="number" name="phone" onChange={handleInput} value={checkoutInput.phone} placeholder="98XXXXXXXX" className="form-control" />
                                     <small className="text-danger">{error.phone}</small>
                                 </div>
                             </div>

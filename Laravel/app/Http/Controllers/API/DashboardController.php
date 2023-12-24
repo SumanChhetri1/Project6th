@@ -41,6 +41,20 @@ class DashboardController extends Controller
         ],
     ]);
 }
+public function getDailyRevenue()
+{
+    $dailyRevenueData = Orderitems::selectRaw('DATE(created_at) as date, SUM(price) as revenue')
+        ->groupBy('date')
+        ->get();
+
+    return response()->json([
+        'status' => 200,
+        'dailyRevenueData' => $dailyRevenueData,
+    ]);
+}
+
+
+
 
 
 }

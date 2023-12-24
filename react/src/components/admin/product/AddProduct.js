@@ -23,6 +23,7 @@ function AddProduct()
         featured: '',
         popular: '',
         status: '',
+        image: '',
     });
     const [pricture, setPicture] = useState([]);
     const [errorlist, setError] = useState([]);
@@ -98,6 +99,7 @@ function AddProduct()
                     featured: '',
                     popular: '',
                     status: '',
+                    image: '',
                 });
                 setError([]);
             }

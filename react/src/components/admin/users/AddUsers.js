@@ -100,9 +100,16 @@ const AddUsers = () => {
                                 </div>
                                 <div className="form-group mb-3">
                                     <label>Password</label>
-                                    <textarea name="password" onChange={handleInput} value={usersInput.password} className="form-control"></textarea>
+                                    <input
+                                        type="password" 
+                                        name="password"
+                                        onChange={handleInput}
+                                        value={usersInput.password}
+                                        className="form-control"
+                                    />
                                     <small className="text-danger">{usersInput.error_list.password}</small>
                                 </div>
+
                                 
 
                             </div>

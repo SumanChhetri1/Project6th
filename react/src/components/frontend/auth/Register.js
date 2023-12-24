@@ -72,7 +72,7 @@ function Register() {
                                     </div>
                                     <div className="form-group mb-3">
                                         <label>Password</label>
-                                        <input type="text" name="password" onChange={handleInput} value={registerInput.password} className="form-control"  />
+                                        <input type="password" name="password" onChange={handleInput} value={registerInput.password} className="form-control"  />
                                         <small className="text-danger">{registerInput.error_list.password}</small>
                                     </div>
                                     <div className="form-group mb-3">

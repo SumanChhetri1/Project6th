@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import '../../styles/dashboard.css';
+import styled from 'styled-components';
 
-const SVG_WIDTH = 600;
-const SVG_HEIGHT = 500;
 
 function Dashboard() {
   const history = useHistory();
@@ -92,21 +91,81 @@ function Dashboard() {
   };
 
 
-  // Constants for chart dimensions and calculations
-  const x0 = 50;
-  const xAxisLength = SVG_WIDTH - x0 * 2;
-  const y0 = 50;
-  const yAxisLength = SVG_HEIGHT - y0 * 2;
-  const xAxisY = y0 + yAxisLength;
-  const revenueValues = dailyRevenueData.map(dataPoint => parseInt(dataPoint.revenue, 10));
+  const ChartContainer  = styled.div`
+  display: flex;
+  justify-content: space-around;
+  height: 300px; /* Set a fixed height based on your design */
+`;
 
-  const dataYMax = revenueValues.reduce((currMax, dataY) => Math.max(currMax, dataY), -Infinity);
-  const dataYMin = 0;
+const BarChartContainer = styled.div`
+  text-align: center;
+  transform: scaleY(-1); /* Inverts only this component */
+
+`;
+
+const Chart = styled.div`
+  margin-top: 10px;
+  width: 56px;
+  &:hover {
+    opacity: 0.8;
+  }
+  @media (max-width: 420px) {
+    width: 34px;
+  }
+`;
+
+const MakeBar = styled.div`
+  height: ${(props) => props.height}%;
+  background-image: linear-gradient(
+    to bottom,
+    ${(props) => props.colors[0]},
+    ${(props) => props.colors[1]}
+  );
+  ${Chart};
+`;
 
 
-  const dataYRange = dataYMax - dataYMin;
-  const numYTicks = 5;
-  const barPlotWidth = xAxisLength / dailyRevenueData.length;
+
+
+const Number = styled.span`
+  font-size: 1.5rem;
+  text-align: center;
+  color: ${(props) => props.color};
+`;
+
+  // Render a simple inline CSS bar chart
+  const renderBarChart = (data) => {
+    if (!Array.isArray(data) || data.length === 0) {
+      return <p>No data available for the bar chart.</p>;
+    }
+  
+    const maxRevenue = Math.max(...data.map((item) => parseInt(item.revenue, 10)));
+  
+    return (
+      <ChartContainer>
+  {data.map((item, index) => (
+    <BarChartContainer key={index}>
+      <Number color={item.revenue > 150 ? 'green' : 'red'}>
+        {item.revenue}
+      </Number>
+      <MakeBar
+        height={(item.revenue / maxRevenue) * 100}
+        colors={item.revenue > 150 ? ['lightgreen', 'green'] : ['pink', 'red']}
+      />
+    </BarChartContainer>
+  ))}
+</ChartContainer>
+    );
+  };
+  
+  
+  
+  
+  
+
+  
+  
+  
   
 
   
@@ -166,57 +225,7 @@ function Dashboard() {
 
         <div>
           <h1 className='mb-4'>Daily Revenue Chart</h1>
-          <div className="bar-chart" >
-            <svg width={SVG_WIDTH} height={SVG_HEIGHT}>
-              <line x1={x0} y1={xAxisY} x2={x0 + xAxisLength} y2={xAxisY} stroke="grey" />
-              <text x={x0 + xAxisLength + 5} y={xAxisY + 4}>
-                Date
-              </text>
-              <line x1={x0} y1={y0} x2={x0} y2={y0 + yAxisLength} stroke="grey" />
-              {Array.from({ length: numYTicks }).map((_, index) => {
-                const y = y0 + index * (yAxisLength / numYTicks);
-                const yValue = Math.round(dataYMax - index * (dataYRange / numYTicks));
-                return (
-                  <g key={index}>
-                    <line x1={x0} y1={y} x2={x0 - 5} y2={y} stroke="grey" />
-                    <text x={x0 - 5} y={y + 5} textAnchor="end">
-                      {yValue}
-                    </text>
-                  </g>
-                );
-              })}
-              <text x={x0} y={y0 - 8} textAnchor="middle">
-                Price
-              </text>
-              {dailyRevenueData.map((dataPoint, index) => {
-                const x = x0 + index * barPlotWidth;
-                const dataY = parseInt(dataPoint.revenue, 10);
-                const yRatio = (dataY - dataYMin) / dataYRange;
-                const y = y0 + (1 - yRatio) * yAxisLength;
-                const height = yRatio * yAxisLength;
-                const sidePadding = 10;
-
-                // Format the date to MM/DD format
-                const date = new Date(dataPoint.date);
-                const formattedDate = `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}`;
-
-                return (
-                  <g key={index}>
-                    <rect
-                      x={x + sidePadding / 2}
-                      y={y}
-                      width={barPlotWidth - sidePadding}
-                      height={height}
-                      fill="green" // Set the fill color to green
-                    />
-                    <text x={x + barPlotWidth / 2} y={xAxisY + 16} textAnchor="middle">
-                      {formattedDate}
-                    </text>
-                  </g>
-                );
-              })}
-            </svg>
-          </div>
+          {renderBarChart(dailyRevenueData)}
         </div>
     
       </div>

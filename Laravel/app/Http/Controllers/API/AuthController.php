@@ -13,10 +13,20 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'name'=>'required|max:191',
-            'name' => 'required|max:191|regex:/^[a-zA-Z]+$/',
-            'email'=>'required|email|max:191|unique:users,email',
-            'password'=>'required|min:8',
+            
+            'name' => 'required|max:191|alpha_spaces',
+            'email' => [
+                'required',
+                'email',
+                'unique:users,email',
+                function ($attribute, $value, $fail) {
+                    if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/', $value)) {
+                        $fail($attribute . ' is invalid.');
+                    }
+                },
+            ],
+                        
+            'password'=>'required|min:8|regex:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).*$/',
         ]);
 
         if($validator->fails())

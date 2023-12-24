@@ -70,6 +70,7 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
 
     // Dashboard
     Route::get('admin/dashboard', [DashboardController::class, 'index']);
+    Route::get('admin/daily-revenue', [DashboardController::class, 'getDailyRevenue']);
 
 
 

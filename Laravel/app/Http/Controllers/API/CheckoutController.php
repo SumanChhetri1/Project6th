@@ -15,13 +15,21 @@ class CheckoutController extends Controller
         if(auth('sanctum')->check())
         {
             $validator = Validator::make($request->all(), [
-                'firstname' => 'required|max:191|alpha',
-                'lastname'=>'required|max:191|alpha',
+                'firstname' => 'required|max:191|alpha_spaces',
+                'lastname'=>'required|max:191|alpha_spaces',
                 'phone'=>'required|min:10|max:10',
-                'email'=>'required|email|max:191',
+                'email' => [
+                    'required',
+                    'email',
+                    function ($attribute, $value, $fail) {
+                        if (!preg_match('/^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$/', $value)) {
+                            $fail($attribute . ' is invalid.');
+                        }
+                    },
+                ],
                 'address'=>'required|max:191|regex:/^[a-zA-Z0-9\-(), ]+$/|regex:/[a-zA-Z]+/|regex:/[0-9]+/',
-                'city'=>'required|max:191|alpha',
-                'state'=>'required|max:191|alpha',
+                'city'=>'required|max:191|alpha_spaces',
+                'state'=>'required|max:191|alpha_spaces',
                 'zipcode'=>'required|min:5|max:5',
             ]);
 

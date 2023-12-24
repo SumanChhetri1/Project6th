@@ -9,12 +9,12 @@ const quickLinks=[
     display:'About'
   },
   {
-    path:'#',
-    display:'Privacy Policy'
+    path:'/orders',
+    display:'My Orders'
   },
   {
     path:'/collections',
-    display:'Gear Listing'
+    display:'Category'
   },
   {
     path:'/contact',

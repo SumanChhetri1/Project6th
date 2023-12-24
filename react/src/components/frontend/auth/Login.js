@@ -75,12 +75,12 @@ function Login() {
                                     <div className="form-group mb-3">
                                         <label>Email ID</label>
                                         <input type="email" name="email" onChange={handleInput} value={loginInput.email} className="form-control" />
-                                        <span>{loginInput.error_list.email}</span>
+                                        <small className="text-danger">{loginInput.error_list.email}</small>
                                     </div>
                                     <div className="form-group mb-3">
                                         <label>Password</label>
                                         <input type="password" name="password" onChange={handleInput} value={loginInput.password} className="form-control" />
-                                        <span>{loginInput.error_list.password}</span>
+                                        <small className="text-danger">{loginInput.error_list.password}</small>
                                     </div>
                                     <div className="form-group mb-3">
                                         <button type="submit" className="btn btn-primary">Login</button>

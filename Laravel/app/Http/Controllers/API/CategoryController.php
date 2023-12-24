@@ -53,7 +53,7 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), [
             // 'meta_title'=>'required|max:191',
             'slug'=>'required|max:191|regex:/^[a-zA-Z0-9\-(), ]+$/|regex:/[a-zA-Z]+/|regex:/[0-9]+/',
-            'name'=>'required|max:191|alpha',
+            'name'=>'required|max:191|alpha_spaces',
             'image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
 
 

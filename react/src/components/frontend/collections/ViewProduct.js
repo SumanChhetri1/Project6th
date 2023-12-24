@@ -14,6 +14,17 @@ function ViewProduct(props)
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState([]);
     const [category, setCategory] = useState([]);
+    const sortedProducts = [...product].sort((a, b) => a.name.localeCompare(b.name));
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearch = (event) => {
+    const query = event.target.value.toLowerCase();
+    setSearchQuery(query);
+    };
+
+    const filteredProducts = sortedProducts.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery)
+    );
 
     const productCount = product.length;
 
@@ -59,26 +70,29 @@ function ViewProduct(props)
         if(productCount)
         {
 
-            showProductList = product.map( (item, idx) => {
-                return (
-                    <>
-                    
-
+             showProductList = (
+                <div className="row">
+                  {filteredProducts.map((item, idx) => (
                     <div className="col-md-3" key={idx}>
-                        <div className="card h-100">
-                            <Link to={`/collections/${item.category.slug}/${item.slug}`}>
-                                <img src={`http://localhost:8000/${item.image}`} className="img_container w-100" alt={item.name} />
-                            </Link>
-                            <div className="card-body">
-                                <Link to={`/collections/${item.category.slug}/${item.slug}`}>
-                                    <h5>{ item.name }</h5>
-                                </Link>
-                            </div>
+                      <div className="card h-100">
+                        <Link to={`/collections/${item.category.slug}/${item.slug}`}>
+                          <img
+                            src={`http://localhost:8000/${item.image}`}
+                            className="img_container w-100"
+                            alt={item.name}
+                          />
+                        </Link>
+                        <div className="card-body">
+                          <Link to={`/collections/${item.category.slug}/${item.slug}`}>
+                            <h5>{item.name}</h5>
+                          </Link>
                         </div>
+                      </div>
                     </div>
-                    </>
-                )
-            });
+                  ))}
+                </div>
+              );
+              
         }
         else
         {
@@ -101,6 +115,18 @@ function ViewProduct(props)
             <div className="py-3">
                <div className="container">
                    <div className="row">
+                    <div className ="row" >
+                        <div className="col-md-4 mb-4">
+                        <input
+                        type="text"
+                        placeholder="Search products..."
+                        value={searchQuery}
+                        onChange={handleSearch}
+                        className="form-control"
+                        />
+                        </div>
+                        </div>
+                        
                        {showProductList}
                    </div>
                </div>
